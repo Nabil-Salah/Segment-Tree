@@ -5,7 +5,8 @@
 }
 
 body {
-    background-color: #181414;
+    background-color: #c63e3e;
+    overflow: hidden;
 }
 
 svg ellipse,
@@ -16,6 +17,10 @@ svg text {
 
 .show {
     opacity: 1;
+}
+
+.hide {
+    opacity: 0.0;
 }
 
 .fade {
@@ -41,7 +46,9 @@ svg text {
     }
 }
 
-.btn {
+
+
+.btnPlay {
     outline: none;
     border: none;
     padding: 1em 2.5em;
@@ -57,9 +64,77 @@ svg text {
     transition: 0.2s;
     top: 50%;
     right: 50%;
+
+
 }
 
-input {
-    outline: none;
+.sample::before {
+    content: "";
+    left: -11%;
+    position: absolute;
+    top: 45%;
+    width: 0;
+    height: 0;
+    background-color: transparent;
+    margin-top: -10px;
+    border-style: solid;
+    border-width: 20px;
+    border-color: transparent #009688 transparent transparent;
+    cursor: pointer;
+}
+
+.sample {
+    position: absolute;
+    top: 2%;
+    right: -386px;
+    transition: right 2s;
+}
+
+@import url(https://fonts.googleapis.com/css?family=Roboto:300);
+
+
+.form {
+    position: relative;
+    z-index: 1;
+    background: #e4293a;
+    max-width: 360px;
+    padding: 13px;
+    text-align: center;
+    box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%), 0 5px 5px 0 rgb(0 0 0 / 24%);
+}
+
+.form input {
+    font-family: "Roboto", sans-serif;
+    outline: 0;
+    background: #f2f2f2;
     border: 0;
+    margin: 0 6px 15px;
+    padding: 15px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+.data-input {
+    width: 100%;
+}
+
+.form button {
+    font-family: "Roboto", sans-serif;
+    text-transform: uppercase;
+    outline: 0;
+    background: #4CAF50;
+    width: 100%;
+    border: 0;
+    padding: 15px;
+    color: #FFFFFF;
+    font-size: 14px;
+    -webkit-transition: all 0.3 ease;
+    transition: all 0.3 ease;
+    cursor: pointer;
+}
+
+.form button:hover,
+.form button:active,
+.form button:focus {
+    background: #43A047;
 }

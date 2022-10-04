@@ -10,11 +10,26 @@
 </head>
 
 <body>
-    <!-- <div class="sample">
-        <h3>Add new input</h3>
-        <h3>choose op</h3>
-    </div> -->
-    <button class="btn">Play</button>
+    <div class="sample">
+        <!-- <span class="pipeline"></span> -->
+        <div class="form">
+            <form class="query-form">
+                <input type="text" name="input-data" class="data-input" placeholder="19,18,20,.." />
+                <input type="radio" name="operation" value="Sum-query" required checked id="sum" />
+                <label for="sum">Sum Query</label>
+                <input type="radio" name="operation" value="Multiply-query" id="Multiply" />
+                <label for="Multiply">Multiply Query</label>
+                <input type="radio" name="operation" value="Max-query" id="max" />
+                <label for="max">Max Query</label>
+                <input type="radio" name="operation" value="Min-query" id="min" />
+                <label for="min">Min Query</label>
+                <input type="radio" name="operation" value="xor-query" id="xor" />
+                <label for="xor">Xor Query</label>
+                <button type="submit">Play</button>
+            </form>
+        </div>
+    </div>
+    <button class="btnPlay">Play</button>
     <div class="myMainDiv">
         <svg class="Layer_1" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1341.9 748.3">
             <ellipse cx="33.45" cy="715.15" rx="31.45" ry="31.15" class="circle16"
