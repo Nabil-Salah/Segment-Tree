@@ -26,16 +26,7 @@ btnsubmit.addEventListener("submit", (event) => {
         inp.split(',').forEach(element => {
             arrsegmant.push(parseInt(element));
         });
-        if (ope === "Sum-query")
-            initArr('+');
-        else if (ope === "Multiply-query")
-            initArr('*');
-        else if (ope === "Max-query")
-            initArr('max');
-        else if (ope === "Min-query")
-            initArr('min');
-        else if (ope === "xor-query")
-            initArr('^');
+        initArr(ope);
     }
     event.preventDefault();
 }, false);
@@ -44,67 +35,54 @@ function buildsegmant(node, l, r, op) {
     let myNodeText = document.querySelector(`.text${node}`);
     let myNodequery = document.querySelector(`.query${node}`);
 
-    myNodeCircle.classList.remove('hide');
-    myNodeCircle.classList.add('show');
     myNodeText.innerHTML = '?';
-    MyFadeFunction(`circle${node}`);
+    appear(myNodeCircle);
     if (l === r) {
         treesegmant[node] = arrsegmant[l];
         myNodeText.innerHTML = `${treesegmant[node]}`;
         myNodequery.innerHTML = `[${l}:${l}]`;
         myNodequery.style.fill = "#1685c6";
-        myNodeText.classList.remove('hide');
-        myNodeText.classList.add('show');
-        myNodequery.classList.remove('hide');
-        myNodequery.classList.add('show');
-        // MyFadeFunction(`circle${node}`);
-        MyFadeFunction(`text${node}`);
-        MyFadeFunction(`query${node}`);
+        appear(myNodeText);
+        appear(myNodequery);
         return;
     }
     let md = Math.floor((l + r) / 2);
     let myNodeleft = document.querySelector(`.from${node}to${node * 2}`);
     let myNoderight = document.querySelector(`.from${node}to${node * 2 + 1}`);
-    myNodeleft.classList.remove('hide');
-    myNodeleft.classList.add('show');
-    MyFadeFunction(`from${node}to${node * 2}`);
+    appear(myNodeleft);
     buildsegmant(node * 2, l, md, op);
-    myNoderight.classList.remove('hide');
-    myNoderight.classList.add('show');
-    MyFadeFunction(`from${node}to${node * 2 + 1}`);
+    appear(myNoderight);
     buildsegmant(node * 2 + 1, md + 1, r, op);
-    if (op === "+") {
+
+    if (op === "Sum-query")
         treesegmant[node] = treesegmant[node * 2] + treesegmant[node * 2 + 1];
-    } else if (op === "+") {
-        treesegmant[node] = treesegmant[node * 2] + treesegmant[node * 2 + 1];
-    } else if (op === "*") {
+    else if (op === "Multiply-query")
         treesegmant[node] = treesegmant[node * 2] * treesegmant[node * 2 + 1];
-    } else if (op === "^") {
-        treesegmant[node] = treesegmant[node * 2] ^ treesegmant[node * 2 + 1];
-    } else if (op === "min") {
-        treesegmant[node] = Math.min(treesegmant[node * 2], treesegmant[node * 2 + 1]);
-    } else if (op === "max") {
+    else if (op === "Max-query")
         treesegmant[node] = Math.max(treesegmant[node * 2], treesegmant[node * 2 + 1]);
-    }
+    else if (op === "Min-query")
+        treesegmant[node] = Math.min(treesegmant[node * 2], treesegmant[node * 2 + 1]);
+    else if (op === "xor-query")
+        treesegmant[node] = treesegmant[node * 2] ^ treesegmant[node * 2 + 1];
     myNodequery.innerHTML = `[${l}:${r}]`;
     myNodequery.style.fill = "#1685c6";
-    myNodequery.classList.remove('hide');
-    myNodequery.classList.add('show');
-    MyFadeFunction(`query${node}`);
+    appear(myNodequery);
     myNodeText.innerHTML = `${treesegmant[node]}`;
-    myNodeText.classList.remove('hide');
-    myNodeText.classList.add('show');
-    MyFadeFunction(`text${node}`);
+    appear(myNodeText);
 }
 
-
+function appear(obj) {
+    obj.classList.remove('hide');
+    obj.classList.add('show');
+    MyFadeFunction(obj);
+}
 function MyFadeFunction(obj) {
-    document.querySelector(`.${obj}`).style.animation = "0.5s fade-in-out both";
-    document.querySelector(`.${obj}`).style.animationDelay = `${dela}s`
+    obj.style.animation = "0.5s fade-in-out both";
+    obj.style.animationDelay = `${dela}s`
     dela += 1;
     setTimeout(() => {
-        document.querySelector(`.${obj}`).style.animation = "";
-        document.querySelector(`.${obj}`).style.animationDelay = ``;
+        obj.style.animation = "";
+        obj.style.animationDelay = ``;
     }, dela * 1000);
 }
 function initArr(op) {
@@ -115,7 +93,7 @@ function initArr(op) {
     dela = 0;
     btn.style.display = "none";
     if (arrsegmant.length === 0) {
-        op = '+';
+        op = "Sum-query";
         arrsegmant = [0, 1, 8, 9, 10, 4, 5, 7, 9];
     }
     treesegmant = [];
@@ -126,6 +104,5 @@ function initArr(op) {
 }
 
 function showMen() {
-    console.log(1);
     sideMen.style.right = "0";
 }
