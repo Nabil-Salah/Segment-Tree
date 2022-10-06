@@ -1,4 +1,4 @@
-# Segmant Tree Visualizer
+# Segment Tree Visualizer
 
 Here I try to visualize segmant tree building operation with its differnt usages (Minimum, Maximum in range, Sum, multiply, Xor range)
 
